@@ -27,11 +27,11 @@ const Pagination = ({ usersPerPage, totalUsers, paginate }) => {
   for (let i = 1; i <= Math.ceil(totalUsers / usersPerPage); i++) {
     pageNumbers.push(i);
   }
-
   return (
     <nav>
       <StyledUl>
         {pageNumbers.map((number) => (
+          // TODO:(yk) Add 'active/current' styling for page navigation
           <li key={number}>
             <a onClick={() => paginate(number)} href="!#">
               {number}

@@ -34,7 +34,7 @@ const Users = ({ users = [], loading }) => {
       {users.map((user) => (
         <li key={user.uuid}>
           <span className="user__avatar">
-            <img src={user.avatar} />
+            <img src={user.avatar} alt="" />
           </span>
           <span className="user__name">{user.name}</span>
           <span className="user__bio">{stripTags(stripScripts(user.bio))}</span>

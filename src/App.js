@@ -8,7 +8,7 @@ function App() {
   const [loading, setLoading] = useState([false]);
   const [users, setUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [usersPerPage, setUsersPerPage] = useState(20);
+  const [usersPerPage] = useState(20);
 
   const indexOfLastUser = currentPage * usersPerPage;
   const indexOfFirstUser = indexOfLastUser - usersPerPage;
@@ -32,7 +32,6 @@ function App() {
 
     fetchUsers();
   }, []);
-  console.log(users);
 
   return (
     <div className="App">
