@@ -2,25 +2,35 @@ import React from 'react';
 import { stripScripts, stripTags } from '../utils/textUtils';
 import styled from 'styled-components';
 
-const StyledUl = styled.ul`
-  li {
-    display: flex;
+const UserList = styled.ul`
+  padding: 0;
+  > li {
+    display: grid;
+    grid-template-columns: 64px 1fr 3fr;
+    grid-column-gap: 8px;
     list-style: none;
     text-align: left;
-    span {
-      display: block;
-      padding: 4px;
-      border: 1px solid #eee;
-      flex: 1;
+    font-size: 14px;
+    border: 1px solid #eee;
+    > div {
+      &:not(:last-child) {
+        border-bottom: 0;
+      }
     }
     .user__avatar {
-      width: 64px;
+      grid-area: 1 / 1 / 3 / 2;
+      border-right: 1px solid #eee;
     }
     .user__name {
-      width: 128px;
+      grid-area: 1 / 2 / 3 / 3;
+      border-right: 1px solid #eee;
+      > h4 {
+        margin: 0 0 16px 0;
+      }
     }
-    .user__company {
-      width: 128px;
+    .user__bio {
+      grid-area: 1 / 3 / 3 / 4;
+      padding-bottom: 16px;
     }
   }
 `;
@@ -30,18 +40,19 @@ const Users = ({ users = [], loading }) => {
     return <p>Loading ...</p>;
   }
   return (
-    <StyledUl>
+    <UserList>
       {users.map((user) => (
         <li key={user.uuid}>
-          <span className="user__avatar">
-            <img src={user.avatar} alt="" />
-          </span>
-          <span className="user__name">{user.name}</span>
-          <span className="user__bio">{stripTags(stripScripts(user.bio))}</span>
-          <span className="user__company">{user.company}</span>
+          <div className="user__avatar">
+            <img src={user.avatar} alt={user.name.substring(0, 1)} />
+          </div>
+          <div className="user__name">
+            <h4>{user.name}</h4> <p>{user.company}</p>
+          </div>
+          <div className="user__bio">{stripTags(stripScripts(user.bio))}</div>
         </li>
       ))}
-    </StyledUl>
+    </UserList>
   );
 };
 

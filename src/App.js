@@ -35,12 +35,13 @@ function App() {
 
   return (
     <div className="App">
-      <Users loading={loading} users={currentUsers} />
       <Pagination
         usersPerPage={usersPerPage}
         totalUsers={users.length}
         paginate={paginate}
+        currentPage={currentPage}
       />
+      <Users loading={loading} users={currentUsers} />
     </div>
   );
 }
