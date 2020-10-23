@@ -41,6 +41,7 @@ function App() {
         paginate={paginate}
         currentPage={currentPage}
       />
+      {console.log(users)}
       <Users loading={loading} users={currentUsers} />
     </div>
   );

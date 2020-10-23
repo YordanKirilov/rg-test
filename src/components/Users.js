@@ -1,6 +1,7 @@
 import React from 'react';
 import { stripScripts, stripTags } from '../utils/textUtils';
 import styled from 'styled-components';
+import DropdownMenu from './DropdownMenu';
 
 const UserList = styled.ul`
   padding: 0;
@@ -48,6 +49,7 @@ const Users = ({ users = [], loading }) => {
           </div>
           <div className="user__name">
             <h4>{user.name}</h4> <p>{user.company}</p>
+            <DropdownMenu users={users} />
           </div>
           <div className="user__bio">{stripTags(stripScripts(user.bio))}</div>
         </li>
