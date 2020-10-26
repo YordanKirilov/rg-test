@@ -16,6 +16,18 @@ function App() {
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const handleUserColorChange = (id, color) => {
+    setUsers(
+      users.map((user) => {
+        if (user.uuid === id) {
+          return { ...user, color: color };
+        } else {
+          return user;
+        }
+      })
+    );
+  };
+
   useEffect(() => {
     // TODO:(yk) add network error handling
     const fetchUsers = async () => {
@@ -41,8 +53,12 @@ function App() {
         paginate={paginate}
         currentPage={currentPage}
       />
-      {console.log(users)}
-      <Users loading={loading} users={currentUsers} />
+      <Users
+        loading={loading}
+        currentUsers={currentUsers}
+        users={users}
+        onUserColorChange={handleUserColorChange}
+      />
     </div>
   );
 }
