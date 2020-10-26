@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 const MenuContainer = styled.div`
@@ -74,34 +74,47 @@ const MenuContainer = styled.div`
   }
 `;
 
-const DropdownMenu = ({ users }) => {
+const DropdownMenu = ({ users, user, onUserColorChange }) => {
   const [isActive, setIsActive] = useState(false);
-  const onClick = () => setIsActive(!isActive);
-
-  const addUsersColor = (users, color = undefined) => {
-    return users.map((user) => {
-      let newObj = { ...user, color };
-      return newObj;
-    });
-  };
-
-  console.log(addUsersColor(users));
+  const toggleDropdown = () => setIsActive(!isActive);
 
   return (
     <MenuContainer>
-      <button onClick={onClick} className="menu-trigger">
+      <button onClick={toggleDropdown} className="menu-trigger">
         <span>User Color</span>
       </button>
       <nav className={`menu ${isActive ? 'active' : 'inactive'}`}>
         <ul>
           <li>
-            <a href="!#">red</a>
+            <a
+              href="!#"
+              onClick={() => {
+                onUserColorChange(user.uuid, '#eeffee');
+                toggleDropdown();
+              }}>
+              green
+            </a>
           </li>
           <li>
-            <a href="!#">green</a>
+            <a
+              href="!#"
+              onClick={() => {
+                onUserColorChange(user.uuid, '#eeeeff');
+                toggleDropdown();
+                console.log(users);
+              }}>
+              blue
+            </a>
           </li>
           <li>
-            <a href="!#">blue</a>
+            <a
+              href="!#"
+              onClick={() => {
+                onUserColorChange(user.uuid, '#ffeeee');
+                toggleDropdown();
+              }}>
+              red
+            </a>
           </li>
         </ul>
       </nav>

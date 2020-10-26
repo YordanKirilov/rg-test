@@ -49,14 +49,14 @@ const handleImageError = (e) => {
   e.target.src = userAvatarPlaceholder;
 };
 
-const Users = ({ users = [], loading }) => {
+const Users = ({ users, currentUsers = [], loading, onUserColorChange }) => {
   if (loading) {
     return <p>Loading ...</p>;
   }
   return (
     <UserList>
-      {users.map((user) => (
-        <li key={user.uuid}>
+      {currentUsers.map((user, index) => (
+        <li key={user.uuid} style={{ background: user.color }}>
           <div className="user__avatar">
             <img
               src={user.avatar}
@@ -66,7 +66,11 @@ const Users = ({ users = [], loading }) => {
           </div>
           <div className="user__name">
             <h4>{user.name}</h4> <p>{user.company}</p>
-            <DropdownMenu users={users} />
+            <DropdownMenu
+              users={users}
+              user={user}
+              onUserColorChange={onUserColorChange}
+            />
           </div>
           <div className="user__bio">{stripTags(stripScripts(user.bio))}</div>
         </li>
