@@ -45,6 +45,21 @@ function App() {
     fetchUsers();
   }, []);
 
+  // TODO:(yk)  This doesn't work
+  const handleChangeLabel = (event, id) => {
+    const newArr = [...users];
+    const userIndex = newArr.findIndex((user) => {
+      return user.uuid === id;
+    });
+    const user = { ...newArr[userIndex] };
+
+    user.label = event.target.value;
+
+    const users = [...newArr];
+    users[userIndex] = user;
+    setUsers({ users: users });
+  };
+
   return (
     <div className="App">
       <Pagination
@@ -58,6 +73,7 @@ function App() {
         currentUsers={currentUsers}
         users={users}
         onUserColorChange={handleUserColorChange}
+        handleChangeLabel={handleChangeLabel}
       />
     </div>
   );

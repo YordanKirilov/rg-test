@@ -2,6 +2,7 @@ import React from 'react';
 import { stripScripts, stripTags } from '../../utils/textUtils';
 import styled from 'styled-components';
 import DropdownMenu from '../DropdownMenu';
+import UserLabel from './UserLabel';
 import UserAvatar from './UserAvatar';
 
 const UserList = styled.ul`
@@ -41,7 +42,12 @@ const UserBio = styled.div`
   padding-bottom: 16px;
 `;
 
-const Users = ({ currentUsers = [], loading, onUserColorChange }) => {
+const Users = ({
+  currentUsers = [],
+  loading,
+  onUserColorChange,
+  handleChangeLabel,
+}) => {
   if (loading) {
     return <p>Loading ...</p>;
   }
@@ -54,7 +60,11 @@ const Users = ({ currentUsers = [], loading, onUserColorChange }) => {
             <h4>{user.name}</h4> <p>{user.company}</p>
             <DropdownMenu user={user} onUserColorChange={onUserColorChange} />
           </UserInfo>
-          <UserBio>{stripTags(stripScripts(user.bio))}</UserBio>
+          <UserBio>
+            {stripTags(stripScripts(user.bio))}
+
+            <UserLabel user={user} handleChangeLabel={handleChangeLabel} />
+          </UserBio>
         </UserItem>
       ))}
     </UserList>
