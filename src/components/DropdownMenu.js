@@ -63,7 +63,7 @@ const Menu = styled.nav`
   }
 `;
 
-const DropdownMenu = ({ users, user, onUserColorChange }) => {
+const DropdownMenu = ({ user, onUserColorChange }) => {
   const [active, setActive] = useState(false);
   const toggleDropdown = () => setActive(!active);
 
