@@ -1,8 +1,8 @@
 import React from 'react';
-import { stripScripts, stripTags } from '../utils/textUtils';
+import { stripScripts, stripTags } from '../../utils/textUtils';
 import styled from 'styled-components';
-import DropdownMenu from './DropdownMenu';
-import userAvatarPlaceholder from '../assets/avatardefault.png';
+import DropdownMenu from '../DropdownMenu';
+import UserAvatar from './UserAvatar';
 
 const UserList = styled.ul`
   padding: 0;
@@ -25,15 +25,6 @@ const UserItem = styled.li`
   }
 `;
 
-const UserAvatar = styled.div`
-  grid-area: 1 / 1 / 3 / 2;
-  border-right: 1px solid #eee;
-  img {
-    display: block;
-    width: 100%;
-  }
-`;
-
 const UserInfo = styled.div`
   grid-area: 1 / 2 / 3 / 3;
   border-right: 1px solid #eee;
@@ -50,10 +41,6 @@ const UserBio = styled.div`
   padding-bottom: 16px;
 `;
 
-const handleImageError = (e) => {
-  e.target.src = userAvatarPlaceholder;
-};
-
 const Users = ({ currentUsers = [], loading, onUserColorChange }) => {
   if (loading) {
     return <p>Loading ...</p>;
@@ -62,13 +49,7 @@ const Users = ({ currentUsers = [], loading, onUserColorChange }) => {
     <UserList>
       {currentUsers.map((user) => (
         <UserItem key={user.uuid} userColor={user.color}>
-          <UserAvatar>
-            <img
-              src={user.avatar}
-              alt={user.name.substring(0, 1)}
-              onError={handleImageError}
-            />
-          </UserAvatar>
+          <UserAvatar user={user} />
           <UserInfo>
             <h4>{user.name}</h4> <p>{user.company}</p>
             <DropdownMenu user={user} onUserColorChange={onUserColorChange} />

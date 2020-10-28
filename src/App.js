@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './App.css';
-import Users from './components/Users';
+import Users from './components/UsersList/Users';
 import Pagination from './components/Pagination';
 
 function App() {
